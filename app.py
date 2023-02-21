@@ -5,7 +5,7 @@ from timeit import default_timer as timer
 from object_distance_prediction import YOLO, detect_video
 from PIL import Image
 
-test_dir = "out"
+test_dir = "./out/"
 testfiles= os.listdir(test_dir)
 
 def detect_img(yolo):
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     Command line positional arguments -- for video detection mode
     '''
     parser.add_argument(
-        "--input", nargs='?', type=str,required=False,default='videos/dashboard_video.mp4',
+        "--input", nargs='?', type=str,required=False,default='videos/input_video.mp4',
         help = "Video input path"
     )
     FLAGS = parser.parse_args()
@@ -75,8 +75,6 @@ if __name__ == '__main__':
             print(" Ignoring remaining command line arguments: " + FLAGS.input + "," + FLAGS.output)
         detect_img(YOLO(**vars(FLAGS)))
     elif "input" in FLAGS:
-        detect_video(YOLO(**vars(FLAGS)), FLAGS.input)
-        
+        detect_video(YOLO(**vars(FLAGS)), FLAGS.input)     
     else:
         print("Must specify at least video_input_path.  See usage with --help.")
-

@@ -3,7 +3,7 @@ import colorsys
 from email.feedparser import FeedParser
 import os
 from timeit import default_timer as timer
-
+import streamlit as st
 import numpy as np
 from keras import backend as K
 from keras.models import load_model
@@ -18,6 +18,10 @@ from tensorflow.python.keras.utils.multi_gpu_utils import multi_gpu_model
 
 from tensorflow.python.framework.ops import disable_eager_execution
 disable_eager_execution()
+
+
+st.set_page_config(page_title='Driver Distraction Detection')
+st.title('Driver Distraction Detection')
 
 class YOLO(object):
     _defaults = {
@@ -126,7 +130,7 @@ class YOLO(object):
                 K.learning_phase(): 0
             })
 
-        font = ImageFont.truetype(font='arial.ttf',
+        font = ImageFont.truetype(font='/workspace/Driver-distraction/arial.ttf',
                     size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
 
         thickness = (image.size[0] + image.size[1]) // 300
@@ -250,8 +254,8 @@ def detect_video(yolo,video_path):
             curr_fps = 0
         cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
                     fontScale=0.50, color=(255, 0, 0), thickness=2)
-        cv2.namedWindow("result", cv2.WINDOW_NORMAL)
         
+        cv2.namedWindow("result", cv2.WINDOW_NORMAL)
         cv2.imshow("result", result)
         
         
