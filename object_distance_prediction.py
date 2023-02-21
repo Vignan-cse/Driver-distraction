@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import colorsys
 from email.feedparser import FeedParser
-import os
 from timeit import default_timer as timer
-import streamlit as st
 import numpy as np
 from keras import backend as K
 from keras.models import load_model
@@ -20,8 +18,6 @@ from tensorflow.python.framework.ops import disable_eager_execution
 disable_eager_execution()
 
 
-st.set_page_config(page_title='Driver Distraction Detection')
-st.title('Driver Distraction Detection')
 
 class YOLO(object):
     _defaults = {
@@ -216,8 +212,7 @@ def detect_video(yolo,video_path):
     import numpy as np
     import argparse
     import pickle
-    import cv2
-    from driver_prediction import predict_result
+    import cv2    from driver_prediction import predict_result
 
     INPUT_VIDEO_FILE = "videos/input_video.mp4"
 
